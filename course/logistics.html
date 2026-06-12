@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>供应链物流数据集 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>供应链物流数据集（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：物流运单基础表</h3>
+            <textarea id="code1">import pandas as pd
+df = pd.DataFrame({
+    "线路":["北线","南线","北线"],
+    "运单量":[120,95,110],
+    "运输时长":[22,18,24]
+})
+print(df)</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：线路总运单量</h3>
+            <textarea id="code2">import pandas as pd
+df = pd.DataFrame({"线路":["A线","A线","B线"],"运单":[80,60,90]})
+print(df.groupby("线路")["运单"].sum())</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：平均运输时长</h3>
+            <textarea id="code3">import pandas as pd
+df = pd.DataFrame({"时长":[20,24,19,21]})
+print("平均运输时长：",round(df["时长"].mean(),1))</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：超时运单筛选</h3>
+            <textarea id="code4">import pandas as pd
+df = pd.DataFrame({"运单":["D1","D2","D3"],"时长":[26,20,28]})
+over = df[df["时长"] > 24]
+print("超时运单：")
+print(over)</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：承运商运单统计</h3>
+            <textarea id="code5">import pandas as pd
+df = pd.DataFrame({"承运商":["甲","乙","甲"],"数量":[50,70,45]})
+print(df.groupby("承运商")["数量"].sum())</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：运费总额计算</h3>
+            <textarea id="code6">import pandas as pd
+df = pd.DataFrame({"运单":[1,2,3],"单价":[15,15,18]})
+df["运费"] = df["运单"] * df["单价"]
+print("总运费：",df["运费"].sum())</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：运单数据降序排序</h3>
+            <textarea id="code7">import pandas as pd
+df = pd.DataFrame({"线路":["L1","L2"],"运量":[210,160]})
+print(df.sort_values("运量",ascending=False))</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：仓储出入库统计</h3>
+            <textarea id="code8">import pandas as pd
+df = pd.DataFrame({"类型":["入库","出库","入库"],"数量":[300,120,250]})
+print("入库总量：",df[df["类型"]=="入库"]["数量"].sum())
+print("出库总量：",df[df["类型"]=="出库"]["数量"].sum())</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：库存余量计算</h3>
+            <textarea id="code9">import pandas as pd
+df = pd.DataFrame({"入库":[500],"出库":[220]})
+df["当前库存"] = df["入库"] - df["出库"]
+print(df)</textarea>
+            <button onclick="runCode('code9','out9')">运行</button>
+            <div id="out9"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习10：物流综合分析</h3>
+            <textarea id="code10">import pandas as pd
+data = {
+    "线路":["东线","西线","东线","西线"],
+    "运单":[90,75,85,68],
+    "时长":[22,19,23,18]
+}
+df = pd.DataFrame(data)
+print("各线路平均运输时长：")
+print(df.groupby("线路")["时长"].mean())
+</textarea>
+            <button onclick="runCode('code10','out10')">运行</button>
+            <div id="out10"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="../js/code-runner.js"></script>
+</body>
+</html>

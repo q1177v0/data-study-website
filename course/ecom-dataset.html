@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电商运营数据集 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>电商运营数据集（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：构建商品销售表</h3>
+            <textarea id="code1">import pandas as pd
+df = pd.DataFrame({
+    "商品":["手机","耳机","手机"],
+    "销量":[25,40,18],
+    "单价":[1999,129,1999]
+})
+print(df)</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：计算单品销售额</h3>
+            <textarea id="code2">import pandas as pd
+df = pd.DataFrame({"商品":["A","B"],"销量":[30,50],"单价":[80,45]})
+df["销售额"] = df["销量"] * df["单价"]
+print(df)</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：全站总销售额</h3>
+            <textarea id="code3">import pandas as pd
+df = pd.DataFrame({"销售额":[2400,3600,1800]})
+print("总销售额：",df["销售额"].sum())</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：爆款商品筛选</h3>
+            <textarea id="code4">import pandas as pd
+df = pd.DataFrame({"商品":["甲","乙","丙"],"销量":[120,45,150]})
+hot = df[df["销量"] > 100]
+print("爆款商品：")
+print(hot)</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：按商品分类汇总销量</h3>
+            <textarea id="code5">import pandas as pd
+df = pd.DataFrame({"品类":["数码","数码","服饰"],"销量":[30,20,40]})
+print(df.groupby("品类")["销量"].sum())</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：价格区间筛选</h3>
+            <textarea id="code6">import pandas as pd
+df = pd.DataFrame({"商品":["A","B","C"],"价格":[99,599,299]})
+res = df[(df["价格"] >= 200) & (df["价格"] <= 600)]
+print("中端价位商品：")
+print(res)</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：订单数据排序</h3>
+            <textarea id="code7">import pandas as pd
+df = pd.DataFrame({"订单号":[1,2,3],"金额":[320,890,560]})
+print(df.sort_values("金额",ascending=False))</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：统计商品种类数量</h3>
+            <textarea id="code8">import pandas as pd
+df = pd.DataFrame({"商品":["手机","耳机","手机","充电宝"]})
+kind = df["商品"].nunique()
+print("商品种类总数：",kind)</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：客单价计算</h3>
+            <textarea id="code9">import pandas as pd
+df = pd.DataFrame({"订单金额":[120,240,180,300]})
+avg_price = df["订单金额"].mean()
+print("平均客单价：",round(avg_price,2))</textarea>
+            <button onclick="runCode('code9','out9')">运行</button>
+            <div id="out9"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习10：电商综合销售分析</h3>
+            <textarea id="code10">import pandas as pd
+data = {
+    "品类":["数码","服饰","数码","服饰"],
+    "销量":[50,35,42,28],
+    "单价":[500,120,480,110]
+}
+df = pd.DataFrame(data)
+df["营收"] = df["销量"] * df["单价"]
+print("各品类总营收：")
+print(df.groupby("品类")["营收"].sum())
+</textarea>
+            <button onclick="runCode('code10','out10')">运行</button>
+            <div id="out10"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="../js/code-runner.js"></script>
+</body>
+</html>

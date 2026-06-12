@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python基础 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>Python基础（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：输出Hello World</h3>
+            <textarea id="code1">print("Hello World")</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：变量赋值与计算</h3>
+            <textarea id="code2">a = 5
+b = 3
+print(a + b)</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：条件判断</h3>
+            <textarea id="code3">x = 10
+if x > 5:
+    print("x大于5")</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：for循环</h3>
+            <textarea id="code4">for i in range(1,6):
+    print(i)</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：列表操作</h3>
+            <textarea id="code5">lst = [1,2,3]
+lst.append(4)
+print(lst)</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：字典操作</h3>
+            <textarea id="code6">d = {"name":"蔡欣淇","age":20}
+print(d["name"])</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：函数定义</h3>
+            <textarea id="code7">def add(a,b):
+    return a+b
+print(add(2,3))</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：字符串处理</h3>
+            <textarea id="code8">s = "数据分析"
+print(s + "课程")</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：导入numpy</h3>
+            <textarea id="code9">import numpy as np
+arr = np.array([1,2,3])
+print(arr)</textarea>
+            <button onclick="runCode('code9','out9')">运行</button>
+            <div id="out9"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习10：学生成绩数据分析综合项目</h3>
+            <textarea id="code10">import pandas as pd
+import numpy as np
+
+# 构建学生成绩数据
+np.random.seed(2026)
+data = {
+    "学生姓名":[f"学生{i}" for i in range(1,41)],
+    "语文":np.random.randint(60,110,40),
+    "数学":np.random.randint(40,120,40)
+}
+df = pd.DataFrame(data)
+print(df.head())
+</textarea>
+            <button onclick="runCode('code10','out10')">运行</button>
+            <div id="out10"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="../js/code-runner.js"></script>
+</body>
+</html>

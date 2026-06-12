@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>招聘网站数据集 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>招聘网站数据集（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：岗位信息表</h3>
+            <textarea id="code1">import pandas as pd
+df = pd.DataFrame({
+    "岗位":["数据分析","运营","数据分析"],
+    "薪资":[6500,5200,6800],
+    "经验要求":["1-3年","应届生","1-3年"]
+})
+print(df)</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：岗位数量统计</h3>
+            <textarea id="code2">import pandas as pd
+df = pd.DataFrame({"岗位":["开发","测试","开发","设计"]})
+print(df["岗位"].value_counts())</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：平均薪资计算</h3>
+            <textarea id="code3">import pandas as pd
+df = pd.DataFrame({"薪资":[5500,6200,4800,7000]})
+print("岗位平均薪资：",round(df["薪资"].mean(),0))</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：高薪岗位筛选</h3>
+            <textarea id="code4">import pandas as pd
+df = pd.DataFrame({"岗位":["A","B","C"],"薪资":[7200,5800,7500]})
+high = df[df["薪资"] >= 7000]
+print("高薪岗位：")
+print(high)</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：按经验要求分组</h3>
+            <textarea id="code5">import pandas as pd
+df = pd.DataFrame({"经验":["应届生","1-3年","应届生"],"薪资":[4500,6000,4800]})
+print(df.groupby("经验")["薪资"].mean())</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：城市岗位分布</h3>
+            <textarea id="code6">import pandas as pd
+df = pd.DataFrame({"城市":["广州","深圳","广州"],"岗位":[1,1,1]})
+print(df.groupby("城市").count())</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：薪资降序排序</h3>
+            <textarea id="code7">import pandas as pd
+df = pd.DataFrame({"岗位":["X","Y"],"薪资":[5600,6900]})
+print(df.sort_values("薪资",ascending=False))</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：应届生专属岗位筛选</h3>
+            <textarea id="code8">import pandas as pd
+df = pd.DataFrame({"岗位":["运营","客服","开发"],"经验":["应届生","应届生","1-3年"]})
+fresh = df[df["经验"]=="应届生"]
+print("应届生可投岗位：")
+print(fresh)</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：行业岗位汇总</h3>
+            <textarea id="code9">import pandas as pd
+df = pd.DataFrame({"行业":["互联网","电商","互联网"],"岗位数":[20,15,18]})
+print(df.groupby("行业")["岗位数"].sum())</textarea>
+            <button onclick="runCode('code9','out9')">运行</button>
+            <div id="out9"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习10：招聘数据综合分析</h3>
+            <textarea id="code10">import pandas as pd
+data = {
+    "岗位":["数据分析","运营","数据分析","运营"],
+    "经验":["1-3年","应届生","1-3年","应届生"],
+    "薪资":[6800,5100,7000,5300]
+}
+df = pd.DataFrame(data)
+print("不同岗位&经验平均薪资：")
+print(df.groupby(["岗位","经验"])["薪资"].mean())
+</textarea>
+            <button onclick="runCode('code10','out10')">运行</button>
+            <div id="out10"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="../js/code-runner.js"></script>
+</body>
+</html>

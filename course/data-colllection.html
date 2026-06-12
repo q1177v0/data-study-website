@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集与处理 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>数据采集与处理（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：检测缺失值</h3>
+            <textarea id="code1">import pandas as pd
+import numpy as np
+df = pd.DataFrame({"A":[1,np.nan,3],"B":[np.nan,5,6]})
+print("缺失值位置：")
+print(df.isnull())</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：删除缺失值</h3>
+            <textarea id="code2">import pandas as pd
+import numpy as np
+df = pd.DataFrame({"X":[1,np.nan,3],"Y":[4,5,np.nan]})
+df_drop = df.dropna()
+print("删除缺失值后：")
+print(df_drop)</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：填充缺失值</h3>
+            <textarea id="code3">import pandas as pd
+import numpy as np
+df = pd.DataFrame({"数据":[22,np.nan,33,np.nan,44]})
+df_fill = df.fillna(df["数据"].mean())
+print("均值填充后：")
+print(df_fill)</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：查找重复数据</h3>
+            <textarea id="code4">import pandas as pd
+df = pd.DataFrame({"ID":[1,2,2,3],"值":[10,20,20,30]})
+print("重复行判断：")
+print(df.duplicated())</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：删除重复数据</h3>
+            <textarea id="code5">import pandas as pd
+df = pd.DataFrame({"名称":["a","b","b","c"],"数量":[1,2,2,3]})
+df_dup = df.drop_duplicates()
+print("去重后数据：")
+print(df_dup)</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：数据类型转换</h3>
+            <textarea id="code6">import pandas as pd
+df = pd.DataFrame({"数字":["11","22","33"]})
+df["数字"] = df["数字"].astype(int)
+print("转换后类型：",df["数字"].dtype)
+print(df)</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：列重命名</h3>
+            <textarea id="code7">import pandas as pd
+df = pd.DataFrame({"col1":[1,2],"col2":[3,4]})
+df.rename(columns={"col1":"编号","col2":"数值"},inplace=True)
+print(df)</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：截取指定列</h3>
+            <textarea id="code8">import pandas as pd
+df = pd.DataFrame({"A":[1,2],"B":[3,4],"C":[5,6]})
+new_df = df[["A","C"]]
+print("选取A、C列：")
+print(new_df)</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：异常值简单处理</h3>
+            <textarea id="code9">import pandas as pd
+df = pd.DataFrame({"分数":[10,88,92,120,75]})
+df = df[df["分数"] <= 110]
+print("剔除异常高分后：")
+print(df)</textarea>
+            <button onclick="runCode('code9','out9')">运行</button>
+            <div id="out9"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习10：综合数据清洗</h3>
+            <textarea id="code10">import pandas as pd
+import numpy as np
+df = pd.DataFrame({"a":[1,np.nan,2,2],"b":[5,6,np.nan,6]})
+df = df.drop_duplicates()
+df = df.fillna(0)
+print("清洗完成数据：")
+print(df)
+</textarea>
+            <button onclick="runCode('code10','out10')">运行</button>
+            <div id="out10"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+    <script src="../js/code-runner.js"></script>
+</body>
+</html>

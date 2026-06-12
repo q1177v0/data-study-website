@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金融交易数据集 | 课程学习</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background: #2980b9;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+        .exercise {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        textarea {
+            width: 100%;
+            height: 180px;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        button {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            background: #222;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href=" " class="back-btn">← 返回首页</a >
+
+        <h1>金融交易数据集（10个实操练习）</h1>
+
+        <div class="exercise">
+            <h3>练习1：构建交易数据表</h3>
+            <textarea id="code1">import pandas as pd
+trade = pd.DataFrame({
+    "类型":["收入","支出","收入"],
+    "金额":[5000,1200,3600]
+})
+print(trade)</textarea>
+            <button onclick="runCode('code1','out1')">运行</button>
+            <div id="out1"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习2：计算总收入</h3>
+            <textarea id="code2">import pandas as pd
+df = pd.DataFrame({"类型":["收入","支出","收入"],"金额":[2000,800,1500]})
+income = df[df["类型"]=="收入"]["金额"].sum()
+print("总收入：",income)</textarea>
+            <button onclick="runCode('code2','out2')">运行</button>
+            <div id="out2"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习3：计算总支出</h3>
+            <textarea id="code3">import pandas as pd
+df = pd.DataFrame({"类型":["收入","支出"],"金额":[3000,900]})
+pay = df[df["类型"]=="支出"]["金额"].sum()
+print("总支出：",pay)</textarea>
+            <button onclick="runCode('code3','out3')">运行</button>
+            <div id="out3"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习4：计算收支结余</h3>
+            <textarea id="code4">import pandas as pd
+df = pd.DataFrame({"类型":["收入","支出"],"金额":[6000,2200]})
+in_sum = df[df["类型"]=="收入"]["金额"].sum()
+out_sum = df[df["类型"]=="支出"]["金额"].sum()
+print("结余：",in_sum - out_sum)</textarea>
+            <button onclick="runCode('code4','out4')">运行</button>
+            <div id="out4"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习5：单笔大额交易筛选</h3>
+            <textarea id="code5">import pandas as pd
+df = pd.DataFrame({"交易":["T1","T2"],"金额":[12000,3000]})
+big = df[df["金额"] > 10000]
+print("大额交易：")
+print(big)</textarea>
+            <button onclick="runCode('code5','out5')">运行</button>
+            <div id="out5"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习6：交易金额平均值</h3>
+            <textarea id="code6">import pandas as pd
+df = pd.DataFrame({"金额":[2200,3500,1800]})
+print("单笔交易平均金额：",df["金额"].mean())</textarea>
+            <button onclick="runCode('code6','out6')">运行</button>
+            <div id="out6"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习7：按日期分组统计</h3>
+            <textarea id="code7">import pandas as pd
+df = pd.DataFrame({"日期":["1日","1日","2日"],"金额":[1000,2000,1500]})
+print(df.groupby("日期")["金额"].sum())</textarea>
+            <button onclick="runCode('code7','out7')">运行</button>
+            <div id="out7"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习8：交易数据排序</h3>
+            <textarea id="code8">import pandas as pd
+df = pd.DataFrame({"编号":[1,2,3],"金额":[500,2000,1200]})
+print(df.sort_values("金额",ascending=False))</textarea>
+            <button onclick="runCode('code8','out8')">运行</button>
+            <div id="out8"></div>
+        </div>
+
+        <div class="exercise">
+            <h3>练习9：统计交易笔数</h3>
+            <textarea id="code9">import pandas as pd
+df = pd.DataFrame({"类型":["收入","支出","收入"]})
+print("总交易笔数：",len(df))
